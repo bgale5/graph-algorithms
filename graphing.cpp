@@ -17,7 +17,7 @@ Result dijkstra(const Graph &graph, int source)
 	unsigned long n = graph.size();
 	std::vector<int> shortest(n, I);
 	shortest[source] = 0;
-	std::vector<int> visited;
+	std::vector<int> predecessors;
 	auto cmp = [&](int a, int b) -> bool {
 		return shortest[a] > shortest[b];
 	};
@@ -26,19 +26,19 @@ Result dijkstra(const Graph &graph, int source)
 		pq[i] = i;
 	std::sort(pq.begin(), pq.end(), cmp);
 	while(!pq.empty()) {
-		int top = *pq.end();
+		int top = pq.back();
 		for (int i = 0; i < n; i++) {
 			if (top == i)
 				continue;
 			if (shortest[top] + graph[top][i] < shortest[i]) {
 				shortest[i] = shortest[top] + graph[top][i];
 				std::sort(pq.begin(), pq.end(), cmp);
+				predecessors.push_back(top);
 			}
 		}
-		visited.push_back(top);
 		pq.pop_back();
 	}
-	Result res = {shortest, visited};
+	Result res = {shortest, predecessors};
 	return res;
 }
 

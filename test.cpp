@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 //		std::cout << std::endl;
 //	}
 
-Result  res = bellmanford(graph, 0);
+Result  res = dijkstra(graph, 0);
 	for (auto &i : res.min_costs) {
 		std::cout << i << ", ";
 	}
