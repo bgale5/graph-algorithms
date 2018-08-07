@@ -8,13 +8,13 @@
 #include <string>
 #include <limits>
 
-#define I 100
+#define I 99
 
 int main(int argc, char **argv)
 {
 	// Test Dijkstra
 
-	std::vector<std::vector<int> > graph(5);
+	Graph graph(5);
 	for (auto &i : graph)
 		i.resize(5);
 	std::vector<int> a = {I, 10, I, 5, I};
@@ -28,9 +28,18 @@ int main(int argc, char **argv)
 	graph[3] = d;
 	graph[4] = e;
 
-	std::vector<int> solution = dijkstra(graph, 0);
-	for (int &i : solution)
+//	std::vector<std::vector<int> > path = floyd_warshall(graph);
+//	for (std::vector<int> &i : path) {
+//		for (int &j : i) {
+//			std::cout << j << ", ";
+//		}
+//		std::cout << std::endl;
+//	}
+
+Result  res = bellmanford(graph, 0);
+	for (auto &i : res.min_costs) {
 		std::cout << i << ", ";
+	}
 	std::cout << std::endl;
 
 	return 0;

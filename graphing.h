@@ -3,7 +3,15 @@
 
 #include <vector>
 
+using Graph = std::vector<std::vector<int> >;
 
-std::vector<int> dijkstra(std::vector<std::vector<int> > weights, int source);
+struct Result {
+	std::vector<int> min_costs;
+	std::vector<int> path;
+};
+
+Result dijkstra(const Graph &graph, int source);
+std::vector<std::vector<int> > floyd_warshall(const Graph &graph);
+Result bellmanford(const Graph &graph, int source);
 
 #endif
